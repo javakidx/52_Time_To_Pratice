@@ -1,0 +1,14 @@
+name: Output Issues Event
+on:
+  issues:
+    types: [opened, edited, closed]
+jobs:
+  output-event:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dump event JSON
+        run: |
+          echo "Event Name: $GITHUB_EVENT_NAME"
+          echo "Event Path: $GITHUB_EVENT_PATH"
+          cat "$GITHUB_EVENT_PATH"
+          echo "${{ toJson(github.event) }}"
